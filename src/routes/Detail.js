@@ -1,5 +1,10 @@
 import { useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
+
+const TopVisual = styled.div`
+  background: url(${props => props.bgImg});
+`;
 
 function Detail(){
   const {id} = useParams();
@@ -12,10 +17,13 @@ function Detail(){
   };
   useEffect(()=>{
     getMovieById();
+    console.log(movieData);
   },[id]);
   return (loading ? <div>loading...</div> : 
   (<div>
-    <div data-bg-img={movieData.background_image}><img src={movieData.medium_cover_image} alt={movieData.title}/></div>
+    <TopVisual bgImg={movieData.background_image}>
+      <img src={movieData.medium_cover_image} alt={movieData.title}/>
+    </TopVisual>
     <h2>{movieData.title} | <span>{movieData.year}</span></h2>
     <ul>
       {movieData.genres.map((genre)=><li key={genre}>{genre}</li>)}

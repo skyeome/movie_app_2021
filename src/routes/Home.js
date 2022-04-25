@@ -1,5 +1,17 @@
 import { useEffect, useState } from "react";
 import Movie from "../components/Movie";
+import styled from "styled-components";
+
+const Container = styled.div`
+  max-width: 1200px;
+  margin:0 auto;
+  padding:0 20px;
+`;
+
+const MovieWrap = styled.div`
+  display:flex;
+  flex-wrap: wrap;
+`;
 
 function Home(){
   const [loading, setLoading] = useState(true);
@@ -15,8 +27,8 @@ function Home(){
     getMovie();
   },[]);
   return (
-    <div>
-      {loading ? (<h1>Loading...</h1>) : (<div>
+    <Container>
+      {loading ? (<h1>Loading...</h1>) : (<MovieWrap>
         {movies.map(movie => 
         <Movie 
           key={movie.id} 
@@ -27,8 +39,8 @@ function Home(){
           genres={movie.genres} 
         />
         )}
-      </div>)}
-    </div>
+      </MovieWrap>)}
+    </Container>
   );
 }
 export default Home;
